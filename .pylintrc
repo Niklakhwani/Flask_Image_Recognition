@@ -1,0 +1,29 @@
+# Pylint configuration for Flask_Image_Recognition
+[MAIN]
+py-version=3.11
+# Only lint our own Python code, not virtual environments
+ignore=.venv,venv,.git,__pycache__
+# TensorFlow is a compiled extension; let pylint inspect it
+extension-pkg-allow-list=tensorflow
+# CI fails if the overall score drops below this value
+fail-under=9.0
+
+[FORMAT]
+max-line-length=100
+
+[BASIC]
+# Allow short, conventional names used in ML / Flask code
+good-names=i,j,k,x,y,e,_,app
+
+[DESIGN]
+max-args=6
+
+[MESSAGES CONTROL]
+# Nothing disabled globally: issues are fixed in code or
+# suppressed inline with a justification.
+disable=
+
+[REPORTS]
+output-format=text
+reports=no
+score=yes

@@ -1,0 +1,5 @@
+# Development / CI tooling
+-r requirements.txt
+pylint==4.1.3
+pytest==8.4.2
+pre-commit==4.3.0
