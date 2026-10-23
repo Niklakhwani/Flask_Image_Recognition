@@ -1,0 +1,21 @@
+# Run `pre-commit install` once after cloning; hooks then run on every `git commit`.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace        # strip spaces at line ends
+      - id: end-of-file-fixer          # files end with exactly one newline
+      - id: check-yaml                 # workflow / config files are valid YAML
+      - id: check-added-large-files    # block accidentally committing big files
+        args: ["--maxkb=1024"]
+      - id: check-merge-conflict       # no leftover <<<<<<< markers
+      - id: debug-statements           # no breakpoint() / pdb left in code
+
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system               # uses the pylint installed in the active venv
+        types: [python]
+        require_serial: true
