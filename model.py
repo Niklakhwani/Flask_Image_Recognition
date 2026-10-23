@@ -1,11 +1,19 @@
 """Model loading, image preprocessing and prediction for hand-sign digits."""
+from functools import lru_cache
+from pathlib import Path
+
 from keras.models import load_model
 from keras.utils import img_to_array
 import numpy as np
 from PIL import Image
 
-# Loading model
-model = load_model("digit_model.h5")
+MODEL_PATH = Path(__file__).resolve().parent / "digit_model.h5"
+
+
+@lru_cache(maxsize=1)
+def get_model():
+    """Load the trained Keras model once and reuse it for later predictions."""
+    return load_model(MODEL_PATH)
 
 
 def preprocess_img(img_path):
@@ -26,5 +34,5 @@ def preprocess_img(img_path):
 
 def predict_result(predict):
     """Run the model on a preprocessed image and return the predicted digit (0-9)."""
-    pred = model.predict(predict)
+    pred = get_model().predict(predict)
     return np.argmax(pred[0], axis=-1)
