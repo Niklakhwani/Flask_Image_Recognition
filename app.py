@@ -24,7 +24,7 @@ def predict_image_file():
     # ValueError: image cannot be reshaped to the model's input shape
     except (KeyError, OSError, ValueError):
         error = "File cannot be processed."
-        return render_template("result.html", err=error)
+        return render_template("result.html", err=error), 400
 
 
 # Driver code
