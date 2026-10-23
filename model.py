@@ -25,7 +25,9 @@ def preprocess_img(img_path):
     Returns:
         A float array of shape (1, 224, 224, 3) with values scaled to [0, 1].
     """
-    op_img = Image.open(img_path)
+    # The model expects 3 colour channels; grayscale (L), transparent (RGBA)
+    # and palette (P) images would otherwise fail to reshape.
+    op_img = Image.open(img_path).convert("RGB")
     img_resize = op_img.resize((224, 224))
     img2arr = img_to_array(img_resize) / 255.0
     img_reshape = img2arr.reshape(1, 224, 224, 3)
