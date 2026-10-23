@@ -9,7 +9,7 @@ on:
 
 jobs:
   quality:
-    name: Lint
+    name: Lint and test
     runs-on: ubuntu-latest
 
     steps:
@@ -32,3 +32,6 @@ jobs:
 
       - name: Run Pylint
         run: pylint $(git ls-files '*.py')
+
+      - name: Run pytest
+        run: pytest
